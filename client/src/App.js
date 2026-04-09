@@ -4,6 +4,10 @@ import Register from "./pages/Register";
 import Admin from "./pages/Admin";
 import Partner from "./pages/Partner";
 import Profile from "./pages/User";
+import SingleMovie from "./pages/Home/SingleMovie";
+import BookShow from "./pages/Home/BookShow";
+import Forget from "./pages/Profile/ForgotPassword";
+import Reset from "./pages/Profile/ResetPassword";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -50,6 +54,24 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            <Route
+              path="/movie/:id"
+              element={
+                <ProtectedRoute>
+                  <SingleMovie />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/book-show/:id"
+              element={
+                <ProtectedRoute>
+                  <BookShow />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/forget" element={<Forget />} />
+            <Route path="/reset/:email" element={<Reset />} />
           </Routes>
         </BrowserRouter>
       </Provider>

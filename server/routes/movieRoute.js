@@ -4,6 +4,7 @@ const {
   getAllMovies,
   updateMovie,
   deleteMovie,
+  getMovieById,
 } = require("../controllers/movieController");
 
 // Add a Movie
@@ -17,5 +18,8 @@ movieRouter.put("/update-movie", updateMovie);
 
 // Delete a movie
 movieRouter.put("/delete-movie", deleteMovie);
+
+// Get a movie by id
+movieRouter.get("/movie/:id", getMovieById);
 
 module.exports = movieRouter;
