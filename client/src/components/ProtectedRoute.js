@@ -9,7 +9,7 @@ import {
 } from "@ant-design/icons";
 import { GetCurrentUser } from "../api/users";
 import { SetUser } from "../redux/userSlice";
-import { message, Layout, Menu } from "antd";
+import { Layout, Menu } from "antd";
 import { ShowLoading, HideLoading } from "../redux/loaderSlice";
 
 const ProtectedRoute = ({ children }) => {
@@ -66,11 +66,17 @@ const ProtectedRoute = ({ children }) => {
     try {
       dispatch(ShowLoading());
       const response = await GetCurrentUser();
-      dispatch(SetUser(response.data));
+      if (response.success) {
+        dispatch(SetUser(response.data));
+      } else {
+        localStorage.removeItem("token");
+        navigate("/login");
+      }
       dispatch(HideLoading());
     } catch (error) {
-      dispatch(SetUser(null));
-      message.error(error.message);
+      dispatch(HideLoading());
+      localStorage.removeItem("token");
+      navigate("/login");
     }
   };
 

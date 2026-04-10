@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
 require('dotenv').config(); // Load environment variables
 
 const connectDB = require('./config/db'); // Import database configuration
@@ -11,7 +12,8 @@ const bookingRouter = require('./routes/bookingRoute'); // Import booking routes
 
 connectDB(); // Connect to database
 
-/** Routes */
+/** Middleware */
+app.use(cors());
 app.use(express.json());
 app.use('/api/users', userRouter);
 app.use('/api/movies', movieRouter);
